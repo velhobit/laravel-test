@@ -31,7 +31,7 @@ class TaskController extends Controller
        try {
            $data = $request->validate([
                "title" => "string",
-               "description" => "required|string|min:6",
+               "description" => "nullable|string",
                "date" => "nullable|date",
                "time" => "nullable|date_format:H:i",
                "color" => 'nullable|string|size:7|regex:/^#[0-9A-Fa-f]{6}$/',
@@ -54,7 +54,7 @@ class TaskController extends Controller
        try {
            $data = $request->validate([
                "title" => "string",
-               "description" => "sometimes|string|min:6",
+               "description" => "nullable|string",
                "date" => "nullable|date",
                "time" => "nullable|date_format:H:i",
                "color" => 'nullable|string|size:7|regex:/^#[0-9A-Fa-f]{6}$/',

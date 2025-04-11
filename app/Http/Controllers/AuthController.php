@@ -19,13 +19,13 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => 'Dados inválidos.'], 422);
+            return response()->json(['error' => 'Invalid Data.'], 422);
         }
 
         $credentials = request(['email', 'password']);
 
         if (!Auth::attempt($credentials)) {
-            return response()->json(['error' => 'Credenciais incorretas.'], 401);
+            return response()->json(['error' => 'Wrong Creadentials. Please check data.'], 401);
         }
 
         $user = $request->user();
@@ -42,5 +42,18 @@ class AuthController extends Controller
     {
         return response()->json($request->user());
     }
+
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+
+        // Revoga o token atual
+        $request->user()->token()->revoke();
+
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
+    }
+
 
 }
